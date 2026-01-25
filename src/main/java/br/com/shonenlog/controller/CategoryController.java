@@ -6,6 +6,8 @@ import br.com.shonenlog.request.CategoryRequest;
 import br.com.shonenlog.response.CategoryResponse;
 import br.com.shonenlog.service.CategoryService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -19,41 +21,43 @@ public class CategoryController {
     private final CategoryService categoryService;
 
     @GetMapping
-    public List<CategoryResponse> findAll() {
+    public ResponseEntity<List<CategoryResponse>> findAll() {
         List<Category> categories = categoryService.findAll();
-        return categories.stream()
+        return ResponseEntity.ok(categories.stream()
                 //.map(category -> CategoryMapper.toCategoryResponse(category)) - sem lambda
                 .map(CategoryMapper::toCategoryResponse)
-                .toList();
+                .toList());
     }
 
     @GetMapping("/{id}")
-    public CategoryResponse findById (@PathVariable Long id) {
+    public ResponseEntity<CategoryResponse> findById (@PathVariable Long id) {
         Optional<Category> optCategory = categoryService.findById(id);
         if(optCategory.isPresent()) {
-            return CategoryMapper.toCategoryResponse(optCategory.get());
+            CategoryResponse categoryResponse = CategoryMapper.toCategoryResponse(optCategory.get());
+            return ResponseEntity.ok(categoryResponse);
         }
-        return null;
+        return ResponseEntity.notFound().build();
     }
 
     @PutMapping("/{id}")
-    public CategoryResponse updateCategory(@PathVariable Long id,@RequestBody CategoryRequest request) {
+    public ResponseEntity<CategoryResponse> updateCategory(@PathVariable Long id,@RequestBody CategoryRequest request) {
         Category updateCategory = categoryService.update(id , CategoryMapper.toCategory(request));
 
-        return CategoryMapper.toCategoryResponse(updateCategory);
+        return ResponseEntity.ok(CategoryMapper.toCategoryResponse(updateCategory));
     }
 
     @PostMapping
-    public CategoryResponse save(@RequestBody CategoryRequest request) {
+    public ResponseEntity<CategoryResponse> save(@RequestBody CategoryRequest request) {
         Category newCategory = CategoryMapper.toCategory(request);
         Category savedCategory = categoryService.save(newCategory);
 
-        return CategoryMapper.toCategoryResponse(savedCategory);
+        return ResponseEntity.status(HttpStatus.CREATED).body(CategoryMapper.toCategoryResponse(savedCategory));
     }
 
     @DeleteMapping("/{id}")
-    public void deleteById (@PathVariable Long id) {
+    public ResponseEntity<Void> deleteById (@PathVariable Long id) {
         categoryService.deleteById(id);
+        return ResponseEntity.noContent().build();
     }
 
 }
