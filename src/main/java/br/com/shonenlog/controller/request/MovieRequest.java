@@ -1,4 +1,4 @@
-package br.com.shonenlog.request;
+package br.com.shonenlog.controller.request;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Builder;

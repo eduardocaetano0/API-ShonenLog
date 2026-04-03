@@ -2,8 +2,8 @@ package br.com.shonenlog.controller;
 
 import br.com.shonenlog.entity.Movie;
 import br.com.shonenlog.mapper.MovieMapper;
-import br.com.shonenlog.request.MovieRequest;
-import br.com.shonenlog.response.MovieResponse;
+import br.com.shonenlog.controller.request.MovieRequest;
+import br.com.shonenlog.controller.response.MovieResponse;
 import br.com.shonenlog.service.MovieService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;

@@ -1,4 +1,4 @@
-package br.com.shonenlog.request;
+package br.com.shonenlog.controller.request;
 
 import lombok.Builder;
 

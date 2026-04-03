@@ -1,4 +1,4 @@
-package br.com.shonenlog.response;
+package br.com.shonenlog.controller.response;
 
 import lombok.Builder;
 

@@ -1,5 +1,6 @@
 package br.com.shonenlog.config;
 
+import jakarta.servlet.DispatcherType;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -27,9 +28,11 @@ public class SecurityConfig {
         return http
                 .csrf(AbstractHttpConfigurer::disable)
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-                    .authorizeHttpRequests(authorize -> authorize.requestMatchers(HttpMethod.POST, "/shonenLog/auth/register").permitAll()
-                    .requestMatchers(HttpMethod.POST, "/shonenLog/auth/login").permitAll()
-                    .anyRequest().authenticated()
+                    .authorizeHttpRequests(authorize -> authorize
+                            .dispatcherTypeMatchers(DispatcherType.ERROR).permitAll()
+                            .requestMatchers(HttpMethod.POST, "/shonenLog/auth/register").permitAll()
+                            .requestMatchers(HttpMethod.POST, "/shonenLog/auth/login").permitAll()
+                            .anyRequest().authenticated()
                 )
                 .addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class)
                 .build();
