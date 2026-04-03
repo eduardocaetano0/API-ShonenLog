@@ -5,6 +5,7 @@ import br.com.shonenlog.mapper.StreamingMapper;
 import br.com.shonenlog.controller.request.StreamingRequest;
 import br.com.shonenlog.controller.response.StreamingResponse;
 import br.com.shonenlog.service.StreamingService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -45,7 +46,7 @@ public class StreamingController {
     }
 
     @PostMapping
-    public StreamingResponse save(@RequestBody StreamingRequest streaming) {
+    public StreamingResponse save(@Valid @RequestBody StreamingRequest streaming) {
 
         Streaming newStreaming = StreamingMapper.toStreaming(streaming);
         Streaming savedStream = service.save(newStreaming);

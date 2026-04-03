@@ -5,6 +5,7 @@ import br.com.shonenlog.mapper.MovieMapper;
 import br.com.shonenlog.controller.request.MovieRequest;
 import br.com.shonenlog.controller.response.MovieResponse;
 import br.com.shonenlog.service.MovieService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -19,7 +20,7 @@ public class MovieController {
     private final MovieService movieService;
 
     @PostMapping
-    public ResponseEntity<MovieResponse> saveMovie(@RequestBody MovieRequest movieRequest){
+    public ResponseEntity<MovieResponse> saveMovie(@Valid @RequestBody MovieRequest movieRequest){
         Movie saveMovie = movieService.saveMovie(MovieMapper.toMovie(movieRequest));
 
         return ResponseEntity.ok().body(MovieMapper.toMovieResponse(saveMovie));
@@ -42,7 +43,7 @@ public class MovieController {
 
     }
     @PutMapping("/{id}")
-    public ResponseEntity<MovieResponse> update(@PathVariable Long id, @RequestBody MovieRequest movieRequest){
+    public ResponseEntity<MovieResponse> update(@PathVariable Long id,@Valid  @RequestBody MovieRequest movieRequest){
         return movieService.update(id, MovieMapper.toMovie(movieRequest))
                 .map(movie -> ResponseEntity.ok(MovieMapper.toMovieResponse(movie)))
                 .orElse(ResponseEntity.notFound().build());

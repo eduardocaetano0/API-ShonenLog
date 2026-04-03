@@ -26,14 +26,17 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         return http
-                .csrf(AbstractHttpConfigurer::disable)
-                .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-                    .authorizeHttpRequests(authorize -> authorize
-                            .dispatcherTypeMatchers(DispatcherType.ERROR).permitAll()
-                            .requestMatchers(HttpMethod.POST, "/shonenLog/auth/register").permitAll()
-                            .requestMatchers(HttpMethod.POST, "/shonenLog/auth/login").permitAll()
-                            .anyRequest().authenticated()
-                )
+                .csrf(csrf -> csrf.disable())
+                .sessionManagement(sm -> sm.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+                .authorizeHttpRequests(req -> {
+
+                    req.requestMatchers("/shonenLog/auth/**").permitAll();
+                    req.requestMatchers("/swagger/**").permitAll();
+                    req.requestMatchers("/api/api-docs/**").permitAll();
+                    req.requestMatchers("/v3/api-docs/**").permitAll();
+
+                    req.anyRequest().authenticated();
+                })
                 .addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class)
                 .build();
     }
