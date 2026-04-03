@@ -14,3 +14,7 @@ spring:
 
   flyway:
     enabled: true
+
+shonenlog:
+  security:
+    secret: ${JWT_SECRET:sua-chave-secreta-muito-grande-aqui}

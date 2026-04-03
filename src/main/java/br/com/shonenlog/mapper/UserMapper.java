@@ -1,8 +1,8 @@
 package br.com.shonenlog.mapper;
 
 import br.com.shonenlog.entity.User;
-import br.com.shonenlog.request.UserRequest;
-import br.com.shonenlog.response.UserResponse;
+import br.com.shonenlog.controller.request.UserRequest;
+import br.com.shonenlog.controller.response.UserResponse;
 import lombok.experimental.UtilityClass;
 
 

@@ -2,8 +2,8 @@ package br.com.shonenlog.controller;
 
 import br.com.shonenlog.entity.Streaming;
 import br.com.shonenlog.mapper.StreamingMapper;
-import br.com.shonenlog.request.StreamingRequest;
-import br.com.shonenlog.response.StreamingResponse;
+import br.com.shonenlog.controller.request.StreamingRequest;
+import br.com.shonenlog.controller.response.StreamingResponse;
 import br.com.shonenlog.service.StreamingService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;

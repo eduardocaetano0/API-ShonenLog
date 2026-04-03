@@ -4,11 +4,8 @@ import br.com.shonenlog.entity.Category;
 import br.com.shonenlog.entity.Movie;
 import br.com.shonenlog.entity.Streaming;
 import br.com.shonenlog.repository.MovieRepository;
-import br.com.shonenlog.request.MovieRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,9 +15,9 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class MovieService {
 
-    private MovieRepository movieRepository;
-    private CategoryService categoryService;
-    private StreamingService streamingService;
+    private final MovieRepository movieRepository;
+    private final CategoryService categoryService;
+    private final StreamingService streamingService;
 
     public Movie saveMovie(Movie movie){
         movie.setCategories(this.findCategories(movie.getCategories()));
@@ -54,10 +51,10 @@ public class MovieService {
             List<Streaming> streamings = this.findStreamings(updateMovie.getStreamings());
 
             Movie movie = optMovie.get();
-            movie.setTitle(movie.getTitle());
-            movie.setDescription(movie.getDescription());
-            movie.setReleaseDate(movie.getReleaseDate());
-            movie.setRating(movie.getRating());
+            movie.setTitle(updateMovie.getTitle());
+            movie.setDescription(updateMovie.getDescription());
+            movie.setReleaseDate(updateMovie.getReleaseDate());
+            movie.setRating(updateMovie.getRating());
 
 
             movie.getCategories().clear();

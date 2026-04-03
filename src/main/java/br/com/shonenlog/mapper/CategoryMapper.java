@@ -2,8 +2,8 @@ package br.com.shonenlog.mapper;
 
 
 import br.com.shonenlog.entity.Category;
-import br.com.shonenlog.request.CategoryRequest;
-import br.com.shonenlog.response.CategoryResponse;
+import br.com.shonenlog.controller.request.CategoryRequest;
+import br.com.shonenlog.controller.response.CategoryResponse;
 import lombok.experimental.UtilityClass;
 
 @UtilityClass

@@ -2,8 +2,8 @@ package br.com.shonenlog.mapper;
 
 
 import br.com.shonenlog.entity.Streaming;
-import br.com.shonenlog.request.StreamingRequest;
-import br.com.shonenlog.response.StreamingResponse;
+import br.com.shonenlog.controller.request.StreamingRequest;
+import br.com.shonenlog.controller.response.StreamingResponse;
 import lombok.experimental.UtilityClass;
 
 @UtilityClass

@@ -3,10 +3,10 @@ package br.com.shonenlog.mapper;
 import br.com.shonenlog.entity.Category;
 import br.com.shonenlog.entity.Movie;
 import br.com.shonenlog.entity.Streaming;
-import br.com.shonenlog.request.MovieRequest;
-import br.com.shonenlog.response.CategoryResponse;
-import br.com.shonenlog.response.MovieResponse;
-import br.com.shonenlog.response.StreamingResponse;
+import br.com.shonenlog.controller.request.MovieRequest;
+import br.com.shonenlog.controller.response.CategoryResponse;
+import br.com.shonenlog.controller.response.MovieResponse;
+import br.com.shonenlog.controller.response.StreamingResponse;
 import lombok.experimental.UtilityClass;
 
 import java.util.List;
@@ -35,16 +35,17 @@ public class MovieMapper {
                 .streamings(streamings)
                 .build();
     }
+
     public static MovieResponse toMovieResponse(Movie movie){
 
         List<CategoryResponse> categories = movie.getCategories()
                 .stream()
-                .map(category -> CategoryMapper.toCategoryResponse(category))
+                .map(CategoryMapper::toCategoryResponse) // Usei Method Reference para ficar mais limpo
                 .toList();
 
         List<StreamingResponse> streamings = movie.getStreamings()
                 .stream()
-                .map(streaming -> StreamingMapper.toStreamingResponse(streaming))
+                .map(StreamingMapper::toStreamingResponse) // Usei Method Reference para ficar mais limpo
                 .toList();
 
         return MovieResponse
