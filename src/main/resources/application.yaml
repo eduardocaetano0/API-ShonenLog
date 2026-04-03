@@ -1,19 +1,23 @@
 spring:
   application:
-    name: ShonenLog
-
+    name: "ShonenLoh"
   datasource:
     url: jdbc:postgresql://localhost:5433/shonenlog
     username: postgres
     password: postgres
     driver-class-name: org.postgresql.Driver
-
   jpa:
     database-platform: org.hibernate.dialect.PostgreSQLDialect
     show-sql: true
 
   flyway:
     enabled: true
+
+springdoc:
+  api-docs:
+    path: /api/api-docs
+  swagger-ui:
+    path: /swagger/index.html
 
 shonenlog:
   security:
